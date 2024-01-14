@@ -36,11 +36,6 @@ public class ApplicationDbContext : DbContext
             .WithMany(e => e.Earnings)
             .HasForeignKey(e => e.FkEmployeeId);
 
-        modelBuilder.Entity<Earning>()
-            .HasOne(e => e.FkEmployee)
-            .WithMany()
-            .HasForeignKey(e => e.FkEmployeeId);
-
         base.OnModelCreating(modelBuilder);
     }
 }
