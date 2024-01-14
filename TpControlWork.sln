@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TpControlWork", "TpControlWork\TpControlWork.csproj", "{7A700CCF-7C51-49B4-9B2C-8BBBFE4CE845}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TpControlWork.Services", "Application\TpControlWork.Services.csproj", "{8FFAE3FE-28E8-46AF-93A4-286CFB2ED650}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TpControlWork.Services", "TpControlWork.Services\TpControlWork.Services.csproj", "{8FFAE3FE-28E8-46AF-93A4-286CFB2ED650}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TpControlWork.DataAccess", "TpControlWork.DataAccess\TpControlWork.DataAccess.csproj", "{35FCE0AF-83DD-47CE-868A-C731391729F6}"
 EndProject

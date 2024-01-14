@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Application\TpControlWork.Services.csproj" />
+    <ProjectReference Include="..\TpControlWork.Services\TpControlWork.Services.csproj" />
     <ProjectReference Include="..\TpControlWork.DataAccess\TpControlWork.DataAccess.csproj" />
     <ProjectReference Include="..\TpControlWork.Domain\TpControlWork.Domain.csproj" />
   </ItemGroup>
