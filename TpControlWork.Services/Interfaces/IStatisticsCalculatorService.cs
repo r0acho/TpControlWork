@@ -1,14 +1,10 @@
-﻿namespace TpControlWork.Services.Interfaces;
+﻿using TpControlWork.Services.Implementations.CalculateStrategies;
+
+namespace TpControlWork.Services.Interfaces;
 
 public interface IStatisticsCalculatorService
 {
-    Task<decimal> CalculateSumAsync(IEnumerable<int>? employeeIds = null);
+    ICalculateStrategy? Strategy { get; set; }
 
-    Task<decimal> CalculateAverageAsync(IEnumerable<int>? employeeIds = null);
-
-    Task<decimal> CalculateMedianAsync(IEnumerable<int>? employeeIds = null);
-
-    Task<decimal> CalculateMaxAsync(IEnumerable<int>? employeeIds = null);
-
-    Task<decimal> CalculateMinAsync(IEnumerable<int>? employeeIds = null);
+    Task<decimal> CalculateByStrategyAsync(IEnumerable<int>? employeeIds);
 }

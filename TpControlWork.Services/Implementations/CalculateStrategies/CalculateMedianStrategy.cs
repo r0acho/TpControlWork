@@ -1,8 +1,15 @@
-﻿namespace TpControlWork.Services.Extensions;
+﻿using TpControlWork.Domain.Models;
 
-public static class EnumerableExtensions
+namespace TpControlWork.Services.Implementations.CalculateStrategies;
+
+public class CalculateMedianStrategy : ICalculateStrategy
 {
-    public static decimal Median(this IEnumerable<decimal> source)
+    public decimal Calculate(IEnumerable<Employee> employees)
+    {
+        return employees.Select(x => x.Salary).Average();
+    }
+
+    public static decimal Median(IEnumerable<decimal> source)
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));

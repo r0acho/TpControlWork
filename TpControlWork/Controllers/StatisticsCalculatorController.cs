@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TpControlWork.Services.Implementations.CalculateStrategies;
 using TpControlWork.Services.Interfaces;
 
 namespace TpControlWork.Controllers;
@@ -19,9 +20,8 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("sum")]
     public async Task<decimal> GetSalarySum([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        if (employeeIds == null) return await _statisticsCalculatorService.CalculateSumAsync();
-
-        return await _statisticsCalculatorService.CalculateSumAsync(employeeIds.ToArray());
+        _statisticsCalculatorService.Strategy = new CalculateSumStrategy();
+        return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 
     // GET: api/statisticsCalculator/avg
@@ -29,9 +29,8 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("avg")]
     public async Task<decimal> GetSalaryAvg([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        if (employeeIds == null) return await _statisticsCalculatorService.CalculateAverageAsync();
-
-        return await _statisticsCalculatorService.CalculateAverageAsync(employeeIds.ToArray());
+        _statisticsCalculatorService.Strategy = new CalculateAverageStrategy();
+        return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 
     // GET: api/statisticsCalculator/median
@@ -39,9 +38,8 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("median")]
     public async Task<decimal> GetSalaryMedian([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        if (employeeIds == null) return await _statisticsCalculatorService.CalculateMedianAsync();
-
-        return await _statisticsCalculatorService.CalculateMedianAsync(employeeIds.ToArray());
+        _statisticsCalculatorService.Strategy = new CalculateMedianStrategy();
+        return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 
     // GET: api/statisticsCalculator/min
@@ -49,9 +47,8 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("min")]
     public async Task<decimal> GetSalaryMin([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        if (employeeIds == null) return await _statisticsCalculatorService.CalculateMinAsync();
-
-        return await _statisticsCalculatorService.CalculateMinAsync(employeeIds.ToArray());
+        _statisticsCalculatorService.Strategy = new CalculateMinStrategy();
+        return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 
     // GET: api/statisticsCalculator/max
@@ -59,8 +56,7 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("max")]
     public async Task<decimal> GetSalaryMax([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        if (employeeIds == null) return await _statisticsCalculatorService.CalculateMaxAsync();
-
-        return await _statisticsCalculatorService.CalculateMaxAsync(employeeIds.ToArray());
+        _statisticsCalculatorService.Strategy = new CalculateMaxStrategy();
+        return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 }
