@@ -1,20 +1,20 @@
-﻿using AutoMapper;
-using TpControlWork.Domain.Enums;
+﻿using TpControlWork.Services.Interfaces;
 using TpControlWork.Domain.Models;
+using TpControlWork.Domain.Enums;
+using AutoMapper;
 using TpControlWork.Domain.Models.Earnings;
 using TpControlWork.Domain.Models.PaymentTypes;
-using TpControlWork.Services.Interfaces;
 
 namespace TpControlWork.Services.Implementations;
 
-public class EmployeeDataAccessToDomainAdapterService : IEmployeeDataAccessToDomainAdapterService
+public class EmployeeDomainToDataAccessAdapterService : Interfaces.IEmployeeDomainToDataAccessAdapterService
 {
     private readonly IMapper _mapper;
 
     private const string _paymentTypeIsNotFound = "Не удалось определить тип получаемой заработной платы";
     private const string _earningTypeIsNotFound = "Не удалось определить тип вознаграждения";
 
-    public EmployeeDataAccessToDomainAdapterService()
+    public EmployeeDomainToDataAccessAdapterService()
     {
         _mapper = new MapperConfiguration(cfg =>
         {
@@ -25,9 +25,9 @@ public class EmployeeDataAccessToDomainAdapterService : IEmployeeDataAccessToDom
         }).CreateMapper();
     }
 
-    public Employee ConvertToDomainEmployee(DataAccess.Entities.Employee employeeFromDataAccess)
+    public DataAccess.Entities.Employee ConvertToDataAccessEmployee(Employee employeeFromDomain)
     {
-        return _mapper.Map<Employee>(employeeFromDataAccess);
+        return _mapper.Map<DataAccess.Entities.Employee>(employeeFromDomain);
     }
 
     private static DataAccess.Entities.EmployeeType MapEmployeeType(EEmployeeType employeeTypeFromDomain)
@@ -92,3 +92,4 @@ public class EmployeeDataAccessToDomainAdapterService : IEmployeeDataAccessToDom
         }).ToList();
     }
 }
+

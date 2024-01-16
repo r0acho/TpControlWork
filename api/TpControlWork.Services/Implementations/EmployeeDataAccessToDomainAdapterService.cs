@@ -1,20 +1,20 @@
-﻿using TpControlWork.Services.Interfaces;
-using TpControlWork.Domain.Models;
+﻿using AutoMapper;
 using TpControlWork.Domain.Enums;
-using AutoMapper;
+using TpControlWork.Domain.Models;
 using TpControlWork.Domain.Models.Earnings;
 using TpControlWork.Domain.Models.PaymentTypes;
+using TpControlWork.Services.Interfaces;
 
 namespace TpControlWork.Services.Implementations;
 
-public class EmployeeDomainToDataAccessAdapterService : Interfaces.IEmployeeDomainToDataAccessAdapterService
+public class EmployeeDataAccessToDomainAdapterService : IEmployeeDataAccessToDomainAdapterService
 {
     private readonly IMapper _mapper;
 
     private const string _paymentTypeIsNotFound = "Не удалось определить тип получаемой заработной платы";
     private const string _earningTypeIsNotFound = "Не удалось определить тип вознаграждения";
 
-    public EmployeeDomainToDataAccessAdapterService()
+    public EmployeeDataAccessToDomainAdapterService()
     {
         _mapper = new MapperConfiguration(cfg =>
         {
@@ -25,11 +25,10 @@ public class EmployeeDomainToDataAccessAdapterService : Interfaces.IEmployeeDoma
         }).CreateMapper();
     }
 
-    public DataAccess.Entities.Employee ConvertToDataAccessEmployee(Employee employeeFromDomain)
+    public Employee ConvertToDomainEmployee(DataAccess.Entities.Employee employeeFromDataAccess)
     {
-        return _mapper.Map<DataAccess.Entities.Employee>(employeeFromDomain);
+        return _mapper.Map<Employee>(employeeFromDataAccess);
     }
-
 
     private EEmployeeType MapEmployeeType(DataAccess.Entities.EmployeeType employeeTypeFromDataAccess)
     {
@@ -38,7 +37,7 @@ public class EmployeeDomainToDataAccessAdapterService : Interfaces.IEmployeeDoma
 
     private PaymentType MapPaymentType(DataAccess.Entities.PaymentType paymentTypeFromDataAccess)
     {
-        if (paymentTypeFromDataAccess.HoursWorked is not null 
+        if (paymentTypeFromDataAccess.HoursWorked is not null
             && paymentTypeFromDataAccess.HourlyRate is not null)
         {
             return new HourlyPayment
@@ -71,7 +70,7 @@ public class EmployeeDomainToDataAccessAdapterService : Interfaces.IEmployeeDoma
     {
         return earningsFromDataAccess.Select<DataAccess.Entities.Earning, Earning>(earningFromDataAccess =>
         {
-            if (earningFromDataAccess.OvertimeHours is not null 
+            if (earningFromDataAccess.OvertimeHours is not null
             && earningFromDataAccess.OvertimeRate is not null)
             {
                 return new OvertimeEarnings
@@ -91,4 +90,3 @@ public class EmployeeDomainToDataAccessAdapterService : Interfaces.IEmployeeDoma
         }).ToList();
     }
 }
-
