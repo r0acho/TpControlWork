@@ -8,13 +8,13 @@ public class Employee
 {
     public int Id { get; set; }
 
-    public required string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-    public required EEmployeeType EmployeeType { get; set; }
+    public EEmployeeType EmployeeType { get; set; }
 
-    public required PaymentType PaymentType { get; set; }
+    public PaymentType PaymentType { get; set; } = null!;
 
-    public required List<Earning> Earnings { get; set; }
+    public List<Earning> Earnings { get; set; } = null!; 
 
     public decimal Salary { get
         {

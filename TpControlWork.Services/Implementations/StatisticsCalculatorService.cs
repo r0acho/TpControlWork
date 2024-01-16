@@ -1,5 +1,6 @@
 ﻿using TpControlWork.Services.Interfaces;
 using TpControlWork.Services.Implementations.CalculateStrategies;
+using TpControlWork.Domain.Models;
 
 namespace TpControlWork.Services.Implementations;
 
@@ -14,14 +15,6 @@ public class StatisticsCalculatorService : IStatisticsCalculatorService
 
     public ICalculateStrategy? Strategy { get; set; }
 
-    public async Task<decimal> CalculateAverageAsync(IEnumerable<int>? employeeIds = null)
-    {
-        if (employeeIds is not null) return (await _employeeService.GetByIdsAsync(
-            employeeIds.ToArray())).Average(x => x.Salary);
-
-        return (await _employeeService.GetAllAsync()).Average(x => x.Salary);
-    }
-
     public async Task<decimal> CalculateByStrategyAsync(IEnumerable<int>? employeeIds)
     {
         if (Strategy is null) throw new InvalidOperationException("Calculate strategy is not set");
@@ -32,4 +25,8 @@ public class StatisticsCalculatorService : IStatisticsCalculatorService
 
         return Strategy.Calculate(employees);
     }
+
+    public decimal CalculateByStrategy(IEnumerable<Employee> employees) => Strategy is not null
+        ? Strategy.Calculate(employees)
+        : throw new InvalidOperationException("Calculate strategy is not set");
 }
