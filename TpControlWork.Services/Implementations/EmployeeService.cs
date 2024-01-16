@@ -7,9 +7,9 @@ namespace TpControlWork.Services.Implementations;
 public class EmployeeService : IEmployeeService
 {
     private readonly IEmployeeRepository _employeeRepository;
-    private readonly IEmployeeAdapterService _employeeAdapterService;
+    private readonly Interfaces.IEmployeeDomainToDataAccessAdapterService _employeeAdapterService;
 
-    public EmployeeService(IEmployeeRepository employeeRepository, IEmployeeAdapterService employeeAdapterService)
+    public EmployeeService(IEmployeeRepository employeeRepository, Interfaces.IEmployeeDomainToDataAccessAdapterService employeeAdapterService)
     {
         _employeeRepository = employeeRepository;
         _employeeAdapterService = employeeAdapterService;

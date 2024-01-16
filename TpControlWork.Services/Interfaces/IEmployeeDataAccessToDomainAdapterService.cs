@@ -2,9 +2,7 @@
 
 namespace TpControlWork.Services.Interfaces;
 
-public interface IEmployeeAdapterService
+public interface IEmployeeDataAccessToDomainAdapterService
 {
     Employee ConvertToDomainEmployee(DataAccess.Entities.Employee employeeFromDataAccess);
-
-    DataAccess.Entities.Employee ConvertToDataAccessEmployee(Employee employeeFromDomain);
 }

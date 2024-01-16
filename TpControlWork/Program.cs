@@ -25,7 +25,7 @@ public class Program
 
         builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-        builder.Services.AddScoped<IEmployeeAdapterService, EmployeeAdapterService>();
+        builder.Services.AddScoped<IEmployeeDomainToDataAccessAdapterService, IEmployeeDomainToDataAccessAdapterService>();
         builder.Services.AddScoped<IStatisticsCalculatorService, StatisticsCalculatorService>();
 
         var app = builder.Build();
