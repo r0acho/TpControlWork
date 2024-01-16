@@ -7,14 +7,14 @@ using TpControlWork.Domain.Models.PaymentTypes;
 
 namespace TpControlWork.Services.Implementations;
 
-public class IEmployeeDomainToDataAccessAdapterService : Interfaces.IEmployeeDomainToDataAccessAdapterService
+public class EmployeeDomainToDataAccessAdapterService : Interfaces.IEmployeeDomainToDataAccessAdapterService
 {
     private readonly IMapper _mapper;
 
     private const string _paymentTypeIsNotFound = "Не удалось определить тип получаемой заработной платы";
     private const string _earningTypeIsNotFound = "Не удалось определить тип вознаграждения";
 
-    public IEmployeeDomainToDataAccessAdapterService()
+    public EmployeeDomainToDataAccessAdapterService()
     {
         _mapper = new MapperConfiguration(cfg =>
         {

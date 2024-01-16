@@ -1,4 +1,3 @@
-
 using TpControlWork.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using TpControlWork.DataAccess.Interfaces;
@@ -25,7 +24,8 @@ public class Program
 
         builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-        builder.Services.AddScoped<IEmployeeDomainToDataAccessAdapterService, IEmployeeDomainToDataAccessAdapterService>();
+        builder.Services.AddScoped<IEmployeeDomainToDataAccessAdapterService, EmployeeDomainToDataAccessAdapterService>();
+        builder.Services.AddScoped<IEmployeeDataAccessToDomainAdapterService, EmployeeDataAccessToDomainAdapterService>();
         builder.Services.AddScoped<IStatisticsCalculatorService, StatisticsCalculatorService>();
 
         var app = builder.Build();
