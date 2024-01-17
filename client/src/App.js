@@ -14,7 +14,12 @@ const App = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await httpClient.get('/employee');
+      const response = await httpClient.get('/employee', {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
+      });
       setEmployees(response.data);
     } catch (error) {
       console.error('Error fetching employees:', error);

@@ -16,7 +16,8 @@ public class Program
         // Add services to the container.
 
         builder.Services.AddControllers();
-        
+        builder.Configuration.AddJsonFile("config.json");
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<ApplicationDbContext>(options =>

@@ -8,6 +8,9 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["TpControlWork/TpControlWork.csproj", "TpControlWork/"]
+COPY ["TpControlWork.DataAccess/TpControlWork.DataAccess.csproj", "TpControlWork.DataAccess/"]
+COPY ["TpControlWork.Domain/TpControlWork.Domain.csproj", "TpControlWork.Domain/"]
+COPY ["TpControlWork.Services/TpControlWork.Services.csproj", "TpControlWork.Services/"]
 RUN dotnet restore "TpControlWork/TpControlWork.csproj"
 COPY . .
 WORKDIR "/src/TpControlWork"

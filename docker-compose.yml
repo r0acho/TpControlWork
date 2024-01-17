@@ -1,0 +1,27 @@
+version: "3.8"
+
+networks:
+  tp_network:
+    driver: bridge
+
+services:
+  server:
+    build: ./api
+    container_name: server
+    networks:
+      - tp_network
+    restart: unless-stopped
+    ports:
+      - "32769:80"
+      - "32768:443"
+
+  client:
+    build: ./client
+    container_name: ui
+    restart: unless-stopped
+    ports:
+      - "4000:3000"
+    depends_on:
+      - server
+    networks:
+      - tp_network
