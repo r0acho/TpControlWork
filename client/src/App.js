@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import EmployeeForm from './components/EmployeeForm';
 import EmployeeList from './components/EmployeeList';
+import { EmployeeInfo } from './components/EmployeeInfo';
 import StatisticsCalculator from './components/StatisticsCalculator';
 import HistogramChart from './components/HistogramChart';
 import { httpClient } from './services/httpClient';
 
 const App = () => {
   const [employees, setEmployees] = useState([]);
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [employeeSelected, setEmployeeSelected] = useState(null);
 
   useEffect(() => {
     fetchEmployees();
@@ -15,12 +15,7 @@ const App = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await httpClient.get('/employee', {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
-        }
-      });
+      const response = await httpClient.get('/employee');
       setEmployees(response.data);
     } catch (error) {
       console.error('Error fetching employees:', error);
@@ -31,14 +26,15 @@ const App = () => {
     setSelectedEmployee(employee);
   };
 
+  const onClick = (employee) => {
+    setEmployeeSelected(employee);
+  };
+
   return (
     <div>
       <h1>Employee Management System</h1>
-      <EmployeeList employees={employees} onSelect={handleEmployeeSelect} />
-      <EmployeeForm
-        selectedEmployee={selectedEmployee}
-        onEmployeeChange={fetchEmployees}
-      />
+      <EmployeeList employees={employees} onSelect={handleEmployeeSelect} onClick={onClick}/>
+      <EmployeeInfo employee={employeeSelected}/>
       <StatisticsCalculator />
       <HistogramChart />
     </div>

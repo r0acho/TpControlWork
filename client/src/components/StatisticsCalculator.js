@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { httpClient } from '../services/httpClient';
 
 const StatisticsCalculator = () => {
@@ -30,7 +29,7 @@ const StatisticsCalculator = () => {
   };
 
   return (
-    <div>
+    <div id='statistics'>
       <h2>Statistics Calculator</h2>
       {/* Display statistics using the data in the 'statistics' state */}
       <p>Sum: {statistics.sum}</p>

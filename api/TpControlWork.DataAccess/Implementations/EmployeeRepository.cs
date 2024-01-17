@@ -29,6 +29,7 @@ public class EmployeeRepository : IEmployeeRepository
     public async Task<IEnumerable<Employee>> GetAllAsync()
     {
         return await _db.Employees
+            .Include(x => x.Earnings)
             .Include(x => x.FkEmployeeType)
             .Include(x => x.FkPaymentType)
             .ToListAsync();
@@ -38,6 +39,7 @@ public class EmployeeRepository : IEmployeeRepository
     {
         return await _db.Employees
             .Include(x => x.FkEmployeeType)
+            .Include(x => x.FkPaymentType)
             .Include(x => x.FkPaymentType)
             .Where(x => ids.Contains(x.Id))
             .ToListAsync();

@@ -16,7 +16,6 @@ public class Program
         // Add services to the container.
 
         builder.Services.AddControllers();
-        builder.Configuration.AddJsonFile("config.json");
 
         var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         builder.Services.AddCors(options =>
@@ -25,8 +24,8 @@ public class Program
                               builder =>
                               {
                                   builder.WithOrigins("*").AllowAnyMethod()
-                                                                              .AllowAnyHeader()
-                                                                              .WithExposedHeaders("Location");
+                                                          .AllowAnyHeader()
+                                                          .WithExposedHeaders("Location");
                               });
         });
 

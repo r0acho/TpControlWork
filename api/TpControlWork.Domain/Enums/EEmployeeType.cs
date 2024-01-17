@@ -2,7 +2,7 @@
 
 public enum EEmployeeType
 {
-    FullTime, 
+    FullTime = 1, 
     PartTime, 
     Contractor
 }

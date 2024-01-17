@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { httpClient } from '../services/httpClient';
 import { BarChart } from '@mantine/charts';
 import { Card } from '@mantine/core';
@@ -13,28 +12,34 @@ const HistogramChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await httpClient.get('/statisticsCalculator/sum');
       const employees = await httpClient.get('/employee');
 
-      setChartData(employees.data)
-      const sumData = response.data;
+      const enumTypeToString = {
+        1: "Full Time",
+        2: "Part Time",
+        3: "Contractor"
+      }
 
-      console.log(employees.data)
+      // Группируем данные по employeeType
+      const groupedData = employees.data.reduce((acc, item) => {
+        const key = item.employeeType;
+        if (!acc[key]) {
+          acc[key] = [];
+        }
+        acc[key].push(item.salary);
+        return acc;
+      }, {});
 
-      // // Assuming your sumData structure is an array of objects with 'employeeType' and 'sum' properties
-      // const labels = sumData.map((item) => item.employeeType);
-      // const data = sumData.map((item) => item.sum);
+      // Создаем массив для labels и datasets
+      const labels = Object.keys(groupedData);
+      const datasets = Object.values(groupedData).map((salaries, index) => ({
+        label: enumTypeToString[labels[index]],
+        data: salaries.reduce((sum, salary) => sum + salary, 0),
+      }));
 
-      // setChartData({
-      //   labels: labels,
-      //   datasets: [
-      //     {
-      //       label: 'Sum of Salaries',
-      //       data: data,
-      //       backgroundColor: 'rgba(75,192,192,0.6)',
-      //     },
-      //   ],
-      // });
+      setChartData(datasets)
+      console.log(datasets)
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -48,8 +53,8 @@ const HistogramChart = () => {
           <BarChart
             h={300}
             data={chartData}
-            dataKey="employeeType"
-            series={[{ name: 'salary', color: 'blue' }]}
+            dataKey="label"
+            series={[{ name: "data", color: 'blue' }]}
           />
         </Card>}
     </div>
