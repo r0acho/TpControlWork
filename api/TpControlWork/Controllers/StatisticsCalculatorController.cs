@@ -20,7 +20,7 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("sum")]
     public async Task<decimal> GetSalarySum([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        _statisticsCalculatorService.Strategy = new CalculateSumStrategy();
+        _statisticsCalculatorService.CalculateStrategy = new CalculateSumStrategy();
         return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 
@@ -29,7 +29,7 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("avg")]
     public async Task<decimal> GetSalaryAvg([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        _statisticsCalculatorService.Strategy = new CalculateAverageStrategy();
+        _statisticsCalculatorService.CalculateStrategy = new CalculateAverageStrategy();
         return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 
@@ -38,7 +38,7 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("median")]
     public async Task<decimal> GetSalaryMedian([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        _statisticsCalculatorService.Strategy = new CalculateMedianStrategy();
+        _statisticsCalculatorService.CalculateStrategy = new CalculateMedianStrategy();
         return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 
@@ -47,7 +47,7 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("min")]
     public async Task<decimal> GetSalaryMin([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        _statisticsCalculatorService.Strategy = new CalculateMinStrategy();
+        _statisticsCalculatorService.CalculateStrategy = new CalculateMinStrategy();
         return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 
@@ -56,7 +56,7 @@ public class StatisticsCalculatorController : ControllerBase
     [Route("max")]
     public async Task<decimal> GetSalaryMax([FromQuery] IEnumerable<int>? employeeIds = null)
     {
-        _statisticsCalculatorService.Strategy = new CalculateMaxStrategy();
+        _statisticsCalculatorService.CalculateStrategy = new CalculateMaxStrategy();
         return await _statisticsCalculatorService.CalculateByStrategyAsync(employeeIds);
     }
 }

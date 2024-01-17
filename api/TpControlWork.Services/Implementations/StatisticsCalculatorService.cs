@@ -13,20 +13,22 @@ public class StatisticsCalculatorService : IStatisticsCalculatorService
         _employeeService = employeeService;
     }
 
-    public ICalculateStrategy? Strategy { get; set; }
+    public ICalculateStrategy? CalculateStrategy { get; set; }
 
     public async Task<decimal> CalculateByStrategyAsync(IEnumerable<int>? employeeIds)
     {
-        if (Strategy is null) throw new InvalidOperationException("Calculate strategy is not set");
+        if (CalculateStrategy is null) throw new InvalidOperationException("Calculate strategy is not set");
 
         var employees = employeeIds is not null
             ? (await _employeeService.GetByIdsAsync(employeeIds.ToArray()))
             : (await _employeeService.GetAllAsync());
 
-        return Strategy.Calculate(employees);
+        return CalculateStrategy.Calculate(employees);
     }
 
-    public decimal CalculateByStrategy(IEnumerable<Employee> employees) => Strategy is not null
-        ? Strategy.Calculate(employees)
+    public decimal CalculateByStrategy(IEnumerable<Employee> employees) => CalculateStrategy is not null
+        ? CalculateStrategy.Calculate(employees)
         : throw new InvalidOperationException("Calculate strategy is not set");
+
+    private 
 }

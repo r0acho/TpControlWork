@@ -5,7 +5,7 @@ namespace TpControlWork.Services.Interfaces;
 
 public interface IStatisticsCalculatorService
 {
-    ICalculateStrategy? Strategy { get; set; }
+    ICalculateStrategy? CalculateStrategy { get; set; }
 
     Task<decimal> CalculateByStrategyAsync(IEnumerable<int>? employeeIds);
 

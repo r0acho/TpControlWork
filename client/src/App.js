@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import EmployeeForm from './components/EmployeeForm';
 import EmployeeList from './components/EmployeeList';
 import StatisticsCalculator from './components/StatisticsCalculator';
+import HistogramChart from './components/HistogramChart';
 import { httpClient } from './services/httpClient';
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
         onEmployeeChange={fetchEmployees}
       />
       <StatisticsCalculator />
+      <HistogramChart />
     </div>
   );
 };

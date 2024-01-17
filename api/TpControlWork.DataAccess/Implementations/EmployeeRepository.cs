@@ -15,9 +15,9 @@ public class EmployeeRepository : IEmployeeRepository
 
     public async Task CreateAsync(Employee newEntity)
     {
+        await SetNavigationPropsByExistingEntriesAsync(newEntity);
         await _db.AddAsync(newEntity);
         await _db.SaveChangesAsync();
-
     }
 
     public async Task DeleteAsync(Employee deletingEntity)
@@ -45,7 +45,31 @@ public class EmployeeRepository : IEmployeeRepository
 
     public async Task UpdateAsync(Employee updatedEntity)
     {
+        await SetNavigationPropsByExistingEntriesAsync(updatedEntity);
         _db.Update(updatedEntity);
         await _db.SaveChangesAsync();
+    }
+
+    private async Task SetNavigationPropsByExistingEntriesAsync(Employee employee)
+    {
+        var employeeType = await _db.EmployeeTypes.FirstOrDefaultAsync(type => 
+            type.Name == employee.FkEmployeeType.Name);
+
+        if (employeeType is not null)
+        {
+            employee.FkEmployeeType = employeeType;
+        }
+
+        var paymentType = await _db.PaymentTypes.FirstOrDefaultAsync(type =>
+            type.HourlyRate == employee.FkPaymentType.HourlyRate
+            && type.HoursWorked == employee.FkPaymentType.HoursWorked
+            && type.MonthlySalary == employee.FkPaymentType.MonthlySalary
+            && type.RatePerPiece == employee.FkPaymentType.RatePerPiece
+            && type.NumberOfPieces == employee.FkPaymentType.NumberOfPieces);
+
+        if (paymentType is not null)
+        {
+            employee.FkPaymentType = paymentType;
+        }
     }
 }
