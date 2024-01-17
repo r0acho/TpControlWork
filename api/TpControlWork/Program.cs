@@ -18,6 +18,18 @@ public class Program
         builder.Services.AddControllers();
         builder.Configuration.AddJsonFile("config.json");
 
+        var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                              builder =>
+                              {
+                                  builder.WithOrigins("*").AllowAnyMethod()
+                                                                              .AllowAnyHeader()
+                                                                              .WithExposedHeaders("Location");
+                              });
+        });
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -39,6 +51,7 @@ public class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseCors(MyAllowSpecificOrigins);
 
         app.UseAuthorization();
 

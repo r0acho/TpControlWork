@@ -70,7 +70,7 @@ public class EmployeeController : ControllerBase
         return NoContent();
     }
 
-    private Domain.Models.PaymentTypes.PaymentType MapPaymentType(PaymentTypeRequestModel paymentTypeRequest)
+    private PaymentType MapPaymentType(PaymentTypeRequestModel paymentTypeRequest)
     {
         return paymentTypeRequest.PaymentType switch
         {

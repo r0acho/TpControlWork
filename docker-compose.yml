@@ -5,15 +5,15 @@ networks:
     driver: bridge
 
 services:
-  server:
-    build: ./api
-    container_name: server
-    networks:
-      - tp_network
-    restart: unless-stopped
-    ports:
-      - "32769:80"
-      - "32768:443"
+  # server:
+  #   build: ./api
+  #   container_name: server
+  #   networks:
+  #     - tp_network
+  #   restart: unless-stopped
+  #   ports:
+  #     - "32769:80"
+  #     - "32768:443"
 
   client:
     build: ./client
@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
     ports:
       - "4000:3000"
-    depends_on:
-      - server
+    # depends_on:
+    #   - server
     networks:
       - tp_network
