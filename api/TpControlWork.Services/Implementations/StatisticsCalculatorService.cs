@@ -29,6 +29,4 @@ public class StatisticsCalculatorService : IStatisticsCalculatorService
     public decimal CalculateByStrategy(IEnumerable<Employee> employees) => CalculateStrategy is not null
         ? CalculateStrategy.Calculate(employees)
         : throw new InvalidOperationException("Calculate strategy is not set");
-
-    private 
 }
