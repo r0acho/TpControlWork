@@ -85,7 +85,7 @@ public class EmployeeDomainToDataAccessAdapterService : Interfaces.IEmployeeDoma
                 return new DataAccess.Entities.Earning
                 {
                     FkEmployeeId = employeeId,
-                    OvertimeRate = bonusEarnings.BonusAmount,
+                    BonusAmount = bonusEarnings.BonusAmount,
                 };
             }
             throw new ArgumentException(_earningTypeIsNotFound);
